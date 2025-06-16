@@ -1,0 +1,19 @@
+<h3>Map of Properties</h3>
+<div id="map" style="height: 500px;"></div>
+
+<!-- 🏡 Property Results Section -->
+<div class="property-results" *ngIf="properties.length > 0">
+  <div class="property-card" *ngFor="let property of properties">
+    <img [src]="property.thumbnailUrl" alt="Property image" class="thumbnail" />
+    <div class="property-details">
+      <p><strong>Address:</strong> {{ property.address }}</p>
+      <p><strong>Price:</strong> {{ property.price }}</p>
+      <p><strong>Thumbnail:</strong> {{ property.thumbnailUrl }}</p>
+    </div>
+  </div>
+</div>
+
+<!-- 📭 No Results Message -->
+<div class="no-results" *ngIf="properties.length === 0">
+  <p>No properties found.</p>
+</div>

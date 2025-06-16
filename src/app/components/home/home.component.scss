@@ -1,0 +1,52 @@
+.hero-section {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('https://source.unsplash.com/1600x900/?house,home,realestate') center/cover no-repeat;
+  color: white;
+}
+
+.search-container {
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 3rem;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+
+  h2 {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    font-weight: 400;
+  }
+
+  .search-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+
+    input {
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: 5px;
+      width: 250px;
+      font-size: 1rem;
+    }
+
+    .btn {
+      background-color: #4a90e2;
+      border: none;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+
+      &:hover {
+        background-color: #357bd8;
+      }
+    }
+  }
+}
