@@ -1,0 +1,27 @@
+<div class="detail-container">
+  <div class="property-info" *ngIf="property">
+    <img *ngIf="property?.images?.length" [src]="property.images[0]" />
+    <h2>{{ property.address }}</h2>
+    <p>{{ property.description }}</p>
+    <ul>
+      <li>Price: ${{ property.price }}</li>
+      <li>Bedrooms: {{ property.bedrooms }}</li>
+      <li>Bathrooms: {{ property.bathrooms }}</li>
+      <li>Area: {{ property.area }} sqft</li>
+    </ul>
+    <button (click)="goBack()">← Back to Results</button>
+  </div>
+
+  <div class="chat-panel">
+    <h3>Ask About This Property</h3>
+    <div class="chat-history">
+      <div *ngFor="let msg of chatHistory">
+        <strong>{{ msg.sender }}:</strong> <span>{{ msg.text }}</span>
+      </div>
+    </div>
+    <div class="chat-input">
+      <input [(ngModel)]="userInput" placeholder="Ask something..." />
+      <button (click)="sendMessage(propertyId,userInput)">Send</button>
+    </div>
+  </div>
+</div>

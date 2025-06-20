@@ -1,16 +1,15 @@
-<h3>Map of Properties</h3>
-<div id="map" style="height: 500px;"></div>
+<div class="property-container">
+<div class="map-section" id="map" style="height: 500px;"></div>
 
 <!-- 🏡 Property Results Section -->
-<div class="property-results" *ngIf="properties.length > 0">
-  <div class="property-card" *ngFor="let property of properties">
-    <img [src]="property.thumbnailUrl" alt="Property image" class="thumbnail" />
-    <div class="property-details">
-      <p><strong>Address:</strong> {{ property.address }}</p>
-      <p><strong>Price:</strong> {{ property.price }}</p>
-      <p><strong>Thumbnail:</strong> {{ property.thumbnailUrl }}</p>
-    </div>
-  </div>
+<!-- Right side: List of property cards -->
+  <div class="list-section">
+    <a *ngFor="let property of properties" class="property-card" [routerLink]="['/property', property.id]">
+      <img *ngIf="property.images?.length" [src]="property.images[0]" alt="Property Image" />
+      <h4>{{ property.address }}</h4>
+      <p>{{ property.description }}</p>
+      <p><strong>${{ property.price }}</strong></p>
+    </a>
 </div>
 
 <!-- 📭 No Results Message -->

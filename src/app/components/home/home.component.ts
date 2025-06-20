@@ -18,6 +18,6 @@ export class HomeComponent {
 
   search() {
     const query = this.searchTerm.trim();
-    this.router.navigate(['/properties'], { queryParams: { zip: query } });
+    this.router.navigate(['/properties'], { queryParams: { location: query } });
   }
 }
