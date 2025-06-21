@@ -18,6 +18,7 @@ export class HomeComponent {
 
   search() {
     const query = this.searchTerm.trim();
-    this.router.navigate(['/properties'], { queryParams: { location: query } });
+    this.router.navigate(['/properties'], 
+      { state: { from: 'HomeComponent', location: query } });
   }
 }

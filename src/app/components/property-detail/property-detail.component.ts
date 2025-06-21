@@ -22,7 +22,8 @@ export class PropertyDetailComponent {
 
   constructor(private route: ActivatedRoute,
     private chatService: ChatService,
-    private propertyService: PropertyService) { }
+    private propertyService: PropertyService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.propertyId = this.route.snapshot.paramMap.get('id')!;
@@ -74,5 +75,7 @@ export class PropertyDetailComponent {
 
   goBack(): void {
     console.log("Back button clicked...")
+    this.router.navigate(['/properties'], 
+      {state: {from: 'PropertyDetailComponent'}})
   }
 }

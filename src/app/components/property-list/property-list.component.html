@@ -1,18 +1,26 @@
 <div class="property-container">
-<div class="map-section" id="map" style="height: 500px;"></div>
+  <!-- Left Side: Map -->
+  <div class="map-section" id="map" style="height: 100%;"></div>
 
-<!-- 🏡 Property Results Section -->
-<!-- Right side: List of property cards -->
+  <!-- Right Side: Property List -->
   <div class="list-section">
     <a *ngFor="let property of properties" class="property-card" [routerLink]="['/property', property.id]">
-      <img *ngIf="property.images?.length" [src]="property.images[0]" alt="Property Image" />
-      <h4>{{ property.address }}</h4>
-      <p>{{ property.description }}</p>
-      <p><strong>${{ property.price }}</strong></p>
+      <img *ngIf="property.images?.length" class="property-thumbnail" [src]="property.images[0]" alt="Property Image" />
+      <div class="property-content">
+        <div class="property-price">${{ property.price | number }}</div>
+        <div class="property-meta">
+          <span>{{ property.bedrooms }} Beds</span> |
+          <span>{{ property.bathrooms }} Baths</span> |
+          <span>{{ property.area }} sqft</span>
+        </div>
+        <div class="property-address">{{ property.address }}</div>
+        <div class="property-description">{{ property.description }}</div>
+      </div>
     </a>
-</div>
+  </div>
 
-<!-- 📭 No Results Message -->
-<div class="no-results" *ngIf="properties.length === 0">
-  <p>No properties found.</p>
+  <!-- If no results -->
+  <div class="no-results" *ngIf="properties.length === 0">
+    <p>No properties found.</p>
+  </div>
 </div>
