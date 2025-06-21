@@ -2,13 +2,13 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { Property } from '../models/property.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class PropertyService {
     private PROPERTY_SERVICE_BASE_URL = "http://localhost:8081/v1/properties";
-
 
     // Optional mock data
     private mockProperties = [
@@ -40,8 +40,9 @@ export class PropertyService {
 
     constructor(private http: HttpClient) { }
 
-    getProperties(): Observable<any[]> {
-        return this.http.get<any[]>(`${this.PROPERTY_SERVICE_BASE_URL}`).pipe(
+    getProperties(searchTerm: any): Observable<any[]> {
+        const params = new HttpParams({ fromObject: searchTerm });
+        return this.http.get<any[]>(`${this.PROPERTY_SERVICE_BASE_URL}`, {params}).pipe(
             catchError((error: HttpErrorResponse) => {
                 console.error('Error fetching properties from backend. Falling back to mock data.', error);
                 return of(this.mockProperties);
@@ -49,13 +50,9 @@ export class PropertyService {
         );
     }
 
-    getPropertyContext(searchTerm: any): Observable<any[]> {
-        const params = new HttpParams({ fromObject: searchTerm });
-        return this.http.get<any[]>(`${this.PROPERTY_SERVICE_BASE_URL}`, { params }).pipe(
-            catchError((error: HttpErrorResponse) => {
-                console.error('Error fetching properties from backend. Falling back to mock data.', error);
-                return of(this.mockProperties);
-            })
-        );
+    getPropertyContext(propertyId: string): Observable<Property> {
+        const params = new HttpParams()
+        .set('id', propertyId);
+        return this.http.get<Property>(`${this.PROPERTY_SERVICE_BASE_URL}/${propertyId}`);
     }
 }
