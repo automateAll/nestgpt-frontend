@@ -1,9 +1,11 @@
-<div class="hero-section">
-  <div class="search-container">
-    <h2>Find your dream home</h2>
-    <form (ngSubmit)="search()">
+<div class="homepage-container">
+  <div class="hero-section">
+    <div class="search-container">
+      <h2>Find your dream home</h2>
+      <form (ngSubmit)="search()">
         <input type="text" name="search" [(ngModel)]="searchTerm" placeholder="Enter zip code" />
         <button type="submit">Search</button>
-    </form>
+      </form>
+    </div>
   </div>
 </div>

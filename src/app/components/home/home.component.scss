@@ -1,51 +1,71 @@
-.hero-section {
-  height: 80vh;
+.homepage-container {
+  position: relative;
+  min-height: 100vh;
+  background: url('../../../assets/NestGPT_theme.png') center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url('https://source.unsplash.com/1600x900/?house,home,realestate') center/cover no-repeat;
-  color: white;
-}
+  z-index: 1;
 
-.search-container {
-  background-color: rgba(0, 0, 0, 0.3);
-  padding: 3rem;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-
-  h2 {
-    margin-bottom: 1.5rem;
-    font-size: 2rem;
-    font-weight: 400;
+  // Overlay to make background lighter
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(255, 255, 255, 0.75); // subtle white overlay
+    z-index: 1;
   }
 
-  .search-box {
+  .hero-section {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 4rem 1rem;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    gap: 1rem;
+  }
 
-    input {
-      padding: 0.75rem 1rem;
-      border: none;
-      border-radius: 5px;
-      width: 250px;
-      font-size: 1rem;
+  .search-container {
+    background: rgba(0, 0, 0, 0.6); // dark glass background
+    color: white;
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 90%;
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
     }
 
-    .btn {
-      background-color: #4a90e2;
-      border: none;
-      color: white;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.2s ease-in-out;
+    form {
+      display: flex;
+      gap: 1rem;
 
-      &:hover {
-        background-color: #357bd8;
+      input[type="text"] {
+        flex: 1;
+        padding: 0.75rem 1rem;
+        border-radius: 6px;
+        border: none;
+        font-size: 1rem;
+      }
+
+      button {
+        padding: 0.75rem 1.2rem;
+        background-color: #4e73df;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+          background-color: #2e59d9;
+        }
       }
     }
   }
