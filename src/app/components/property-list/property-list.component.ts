@@ -5,6 +5,7 @@ import { PropertyService } from '../../services/property.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { PropertyStateService } from '../../services/property-state.service';
+import { Property } from '../../models/property.model';
 
 @Component({
   standalone: true,
@@ -74,24 +75,34 @@ export class PropertyListComponent {
     this.propertyService.getProperties(searchTerm).subscribe((data) => {
       this.properties = data;
 
-      this.setMapView(this.map)
+      // this.setMapView(this.map)
 
       this.propertyState.setProperties(data)
-      console.log(data);
+      // console.log(data);
       if (this.map) {
+        const bounds = L.latLngBounds([]);
+        let hasValidMarkers = false;
+
         const customIcon = L.icon({
           iconSize: [25, 41],
           iconAnchor: [13, 41],
           iconUrl: '/images/marker-icon.png',
           shadowUrl: '/images/marker-shadow.png'
         });
-        this.properties.forEach((property: any) => {
+        this.properties.forEach((property: Property) => {
+          const latLng = L.latLng(property.latitude, property.longitude);
           if (property.latitude && property.longitude) {
-            L.marker([property.latitude, property.longitude], { icon: customIcon })
+            L.marker(latLng, { icon: customIcon })
               .addTo(this.map!)
               .bindPopup(`<b>${property.address}</b><br>Price: $${property.price}`);
+              bounds.extend(latLng);
+              hasValidMarkers=true;
           }
         });
+        // Fit the map to all markers
+        if(hasValidMarkers){
+          this.map.fitBounds(bounds, { padding: [20, 20] }); // Optional padding
+        }
       }
     });
   }
@@ -99,7 +110,7 @@ export class PropertyListComponent {
   loadExistingListOfProperties(): void {
     this.properties = this.propertyState.getProperties();
     if (this.map) {
-      this.setMapView(this.map)
+      // this.setMapView(this.map)
       const customIcon = L.icon({
         iconSize: [25, 41],
         iconAnchor: [13, 41],
